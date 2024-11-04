@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "langgraph-server-test"
+version = "0.1.0"
+description = ""
+authors = ["atolopko <atolopko@chanzuckerberg.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+langgraph-cli = "^0.1.52"
+typing-extensions = "^4.12.2"
+langgraph = "^0.2.44"
+
+
+[tool.poetry.group.dev.dependencies]
+requests = "^2.32.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

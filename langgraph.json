@@ -1,0 +1,12 @@
+{
+  "dockerfile_lines": [],
+  "graphs": {
+    "simple": "langgraph_server_test/simple.py:graph",
+    "ready_or_not": "langgraph_server_test/ready_or_not.py:graph"
+  },
+  "env": "./.env",
+  "python_version": "3.12",
+  "dependencies": [
+    "pyproject.toml", "."
+  ]
+}
