@@ -25,7 +25,7 @@ def decide_mood(state) -> Literal["node_2", "node_3"]:
 # Nodes
 def node_1(state):
     print("---Node 1---")
-    return {"graph_state":state['graph_state'] +" I am"}
+    return {"graph_state":state['graph_state'] +"[2] I am"}
 
 def node_2(state):
     print("---Node 2---")

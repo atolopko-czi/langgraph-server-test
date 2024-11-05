@@ -26,21 +26,21 @@ services:
     ports:
       - "127.0.0.1:5433:5432"
 
-  langgraph-api:
-    image: ${IMAGE_NAME}
-    ports:
-        - "8123:8000"
-    depends_on:
-        langgraph-redis:
-            condition: service_healthy
-        langgraph-postgres:
-            condition: service_healthy
-    env_file:
-        - .env
-    environment:
-        REDIS_URI: redis://langgraph-redis:6379
-        LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
-        POSTGRES_URI: postgres://postgres:postgres@langgraph-postgres:5432/postgres?sslmode=disable
+  # langgraph-api:
+  #   image: ${IMAGE_NAME}
+  #   ports:
+  #       - "8123:8000"
+  #   depends_on:
+  #       langgraph-redis:
+  #           condition: service_healthy
+  #       langgraph-postgres:
+  #           condition: service_healthy
+  #   env_file:
+  #       - .env
+  #   environment:
+  #       REDIS_URI: redis://langgraph-redis:6379
+  #       LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+  #       POSTGRES_URI: postgres://postgres:postgres@langgraph-postgres:5432/postgres?sslmode=disable
         
 volumes:
     langgraph-data:

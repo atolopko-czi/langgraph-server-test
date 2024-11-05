@@ -1,23 +1,42 @@
 from pprint import pprint as pp
 import langgraph_sdk as lg
 
-api_base_url = "http://localhost:8123"
-lgc = lg.get_sync_client(url=api_base_url)
+lgc1 = lg.get_sync_client(url="http://localhost:8001")
+lgc2 = lg.get_sync_client(url="http://localhost:8002")
 
-assistant = lgc.assistants.create(name="Dynamic Graph 1",
+assistant1 = lgc1.assistants.create(name="Dynamic Graph 1",
                                   graph_id="graph_factory", 
-                                  assistant_id="08c1160f-cb40-40f4-a13f-b62ebfb6538a",
-                                  if_exists="do_nothing")
-pp(assistant)
+                                  config={"dyn_graph_key":"ready_or_not"},
+                                  )
+pp(assistant1)
 
-assistants = lgc.assistants.search()
-pp(f"# assistants: {len(assistants)}")
+assistant2 = lgc2.assistants.update(assistant_id=assistant1['assistant_id'],
+                                  graph_id="graph_factory", 
+                                  config={"dyn_graph_key":"simple"},
+                                  )
 
-thread = lgc.threads.create()
-pp(thread)
+pp(assistant2)
 
-reply = lgc.runs.wait(thread_id=thread['thread_id'],
-                      assistant_id=assistant['assistant_id'],
-                      config={"dyn_graph_key":"ready_or_not"},
-                      input={"graph_state" : "What a nice day."})
+# versions = lgc.assistants.get_versions(assistant_id=assistant1['assistant_id'])
+# print(versions)
+
+# assistants = lgc.assistants.search()
+# pp(f"# assistants: {len(assistants)}")
+
+# thread = lgc.threads.create()
+# pp(thread)
+
+reply = lgc1.runs.wait(thread_id=None,#thread['thread_id'],
+                      assistant_id=assistant1['assistant_id'],
+                      config={"dyn_graph_key":"simple"},
+                      input={"graph_state" : "What a nice day."},
+                      on_completion="delete")
 pp(reply)
+
+reply = lgc2.runs.wait(thread_id=None, #thread['thread_id'],
+                      assistant_id=assistant2['assistant_id'],
+                      config={"dyn_graph_key":"simple"},
+                      input={"graph_state" : "What a nice day."},
+                      on_completion="delete")
+pp(reply)
+
