@@ -10,6 +10,27 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Run Agent (Local)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/run_agent_server_basic.py",
+            "console": "integratedTerminal",
+            "env": {
+                "LANGRAPH_API_BASE_URL": "http://localhost:8003"
+            }
+        },
+        {
+            "name": "Run Agent (Remote)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/run_agent_server_basic.py",
+            "console": "integratedTerminal",
+            "env": {
+                "LANGRAPH_API_BASE_URL": "https://langgraph-cloud-test-f2041521eb7e53ac9aa8289be26a44a1.default.us.langgraph.app"
+            }
         }
+
     ]
 }
